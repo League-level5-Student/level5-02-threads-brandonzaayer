@@ -24,7 +24,12 @@ public class AdvancedRobotRace {
 				one.setSpeed(speed1);
 				one.move(1);
 			}
-			places.add("Racer 1");
+			synchronized (places) {
+				if(places.size()==0) {
+					JOptionPane.showMessageDialog(null, "Robot 1 wins!");
+				}
+				places.add("Racer 1");
+			}
 			});
 		Thread r2 = new Thread(()->{
 			Robot two = new Robot(300, 500);
@@ -32,7 +37,12 @@ public class AdvancedRobotRace {
 				two.setSpeed(speed2);
 				two.move(1);
 			}
-			places.add("Racer 2");
+			synchronized (places) {
+				if(places.size()==0) {
+					JOptionPane.showMessageDialog(null, "Robot 2 wins!");
+				}
+				places.add("Racer 2");
+			}
 			});
 		Thread r3 = new Thread(()->{
 			Robot three = new Robot(500, 500);
@@ -40,11 +50,15 @@ public class AdvancedRobotRace {
 				three.setSpeed(speed3);
 				three.move(1);
 			}
-			places.add("Racer 3");
+			synchronized (places) {
+				if(places.size()==0) {
+					JOptionPane.showMessageDialog(null, "Robot 3 wins!");
+				}
+				places.add("Racer 3");
+			}
 			});
 		r1.start();
 		r2.start();
 		r3.start();
-		JOptionPane.showMessageDialog(null, places.get(0) + " wins!");
 	}
 }
